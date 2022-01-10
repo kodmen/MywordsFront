@@ -1,1 +1,43 @@
-<p>home works!</p>
+
+<div class="container mt-5 ">
+    <ng-container *ngIf="dataLoaded==true">
+
+        <div class="row">
+            <div class="col-12 ust-yuksek"></div>
+<!-- 
+                <h2>Yeni Deste ekleme</h2>
+                <button type="button" [click]="desteEkle()"><i class="fa fa-plus-square" aria-hidden="true"></i> Ekle</button>
+                <div *ngIf="desteEkleForm==true">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </div>
+              </div> -->
+              
+          
+            <div class="ust-yuksek"></div>
+            <ng-container *ngFor="let d of desteler ">
+                <div class="col-md-4 col-xl-3 ">
+                    <div class="card bg-c-blue order-card" [style] = "getbgColor(d.renk)">
+                        <div class="card-block">
+                            <h2 class="m-b-20">{{ d.name | uppercase }}</h2>
+                            <!-- <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span class="mx-2">{{ d.name | uppercase }}</span></h2> -->
+                            <p class="m-b-0"> kelime sayisi: {{ d.kartlars.length }}</p>
+                            <button type="button" class="btn btn-warning btn-lg"><i class="fa fa-wrench" aria-hidden="true"></i> duzenle</button>
+                            <button type="button" class="btn btn-success btn-lg f-right"> <i class="fa fa-play" aria-hidden="true"></i> basla</button>
+
+                            <!-- <ul>
+                            <li>{{d.kartlars.length}}</li>
+                            <li *ngFor="let k of d.kartlars">{{k.onYuz}}</li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </ng-container>
+  
+</div>
+
+
