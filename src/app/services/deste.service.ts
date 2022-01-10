@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ListResponseModel } from 'src/app/models/requests/listResponseModel';
 import { Deste } from '../models/deste';
+import {yeniDeste} from '../models/yeniDeste'
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,14 @@ export class DesteService {
     let api = `${this.endpoint}/deste-user`;
     return this.http.get<ListResponseModel<Deste>>(api, { headers: this.headers });
     
+  }
+
+  postNewDeste(deste:yeniDeste){
+    let api = `${this.endpoint}/destes-user`;
+    return this.http.post(api, deste)
+    .pipe(
+      catchError(this.handleError)
+    )
   }
 
     // Error 

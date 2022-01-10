@@ -15,6 +15,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
+import { KartComponent, NgbdModalContent } from './components/kart/kart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+// import { NgbdModalComponent, NgbdModalContent } from './modal-component';
 
 const materialModules = [
   MatIconModule
@@ -28,6 +33,8 @@ const materialModules = [
     UserProfileComponent,
     HeaderComponent,
     HomeComponent,
+    KartComponent,
+    NgbdModalContent
     
   ],
   imports: [
@@ -37,6 +44,7 @@ const materialModules = [
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgbModule,
     
   ],
   providers: [

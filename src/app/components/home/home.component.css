@@ -25,6 +25,7 @@ body{
 .bg-c-pink {
     background: linear-gradient(45deg,#FF5370,#ff869a);
 }
+/* burda hangi rengi istiyorsun diye sorucak mavi yeşil sarı penbe */
 
 
 .card {
@@ -51,4 +52,14 @@ body{
 
 .f-right {
     float: right;
+}
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
 }
