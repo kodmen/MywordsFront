@@ -1,0 +1,62 @@
+<!-- <ng-container *ngIf="dataLoaded"> 
+
+    
+
+<form>
+  <div class="form-group form-inline">
+      Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Ön yüz</th>
+    <th scope="col">Arka Yuz</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let kart of kartlar$ | async; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      <ngb-highlight [result]="kart.onYuz" [term]="filter.value"></ngb-highlight>
+    </td>
+    <td><ngb-highlight [result]="kart.arkaYuz" [term]="filter.value"></ngb-highlight></td>
+  </tr>
+  </tbody>
+</table>
+
+
+</ng-container> -->
+
+
+<ng-container *ngIf="dataLoaded"> 
+<div class="col-10">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ön yuz</th>
+            <th scope="col">Arka yuz</th>
+            <th scope="col">Sil</th>
+            <th scope="col">Güncelle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let kart of kartlar$; index as i">
+            <th scope="row">{{i}}</th>
+            <td>{{kart.onYuz}}</td>
+            <td>{{kart.arkaYuz}}</td>
+            <td><button class="btn btn-danger" (click)="sil(kart.id)">sil </button></td>
+            <td><button class="btn btn-warning" (click)="guncelle(kart)"> güncelle </button></td>
+
+          </tr>
+        </tbody>
+      </table>
+</div>
+    
+    
+
+</ng-container>

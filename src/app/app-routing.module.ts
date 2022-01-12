@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DesteComponent } from './components/deste/deste.component';
 import { HomeComponent } from './components/home/home.component';
 import { KartComponent } from './components/kart/kart.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'kart/:desteId', component: KartComponent, canActivate: [AuthGuard]},
+  { path: 'deste/:desteId', component: DesteComponent, canActivate: [AuthGuard]},
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] }
 ];
 

@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ListResponseModel } from 'src/app/models/requests/listResponseModel';
 import { Deste } from '../models/deste';
 import {yeniDeste} from '../models/yeniDeste'
+import {SingleResponseModel}  from '../models/requests/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,10 @@ export class DesteService {
     return this.http.delete(api).pipe(catchError(this.handleError));
   }
 
+  getOneDeste(id:number){
+    let api = `${this.endpoint}/destes/${id}`;
+    return this.http.get<SingleResponseModel<Deste>>(api).pipe(catchError(this.handleError));
+  }
 
     // Error 
     handleError(error: HttpErrorResponse) {

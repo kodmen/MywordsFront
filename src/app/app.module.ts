@@ -14,10 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent,DesteGuncelle } from './components/home/home.component';
+import { HomeComponent,DesteGuncelle , KartEkleModel } from './components/home/home.component';
 import { KartComponent, NgbdModalContent,SilmeSorgu } from './components/kart/kart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SliderComponent } from './components/slider/slider.component';
+import { DesteComponent } from './components/deste/deste.component';
 
 
 // import { NgbdModalComponent, NgbdModalContent } from './modal-component';
@@ -38,7 +39,9 @@ const materialModules = [
     NgbdModalContent,
     SilmeSorgu,
     DesteGuncelle,
-    SliderComponent
+    SliderComponent,
+    DesteComponent,
+    KartEkleModel
   ],
   imports: [
     BrowserModule,

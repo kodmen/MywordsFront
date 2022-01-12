@@ -1,39 +1,26 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#" style="padding-left: 10px;" routerLink="/home">kelime kartları</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="this.authService.isLoggedIn">
-          <a class="nav-link" routerLinkActive="active" routerLink="/user-profile">User Profile</a>
-        </li>
-        <li class="nav-item" *ngIf="this.authService.isLoggedIn">
-            <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
-          </li>
-        <li class="nav-item" *ngIf="!this.authService.isLoggedIn">
-          <a class="nav-link"   routerLinkActive="active" routerLink="/log-in">Sign-in</a>
-        </li>
-        <li class="nav-item" *ngIf="!this.authService.isLoggedIn">
-          <a class="nav-link"  routerLinkActive="active" routerLink="/sign-up">Sign-up</a>
-        </li>
-        <li class="nav-item" *ngIf="this.authService.isLoggedIn">
-            <a class="nav-link" href="#" (click)="logout()" >Logout</a>
-          </li>
-      </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+                <a class="nav-link" routerLinkActive="active" routerLink="/user-profile">User Profile</a>
+            </li>
+            <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+                <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
+            </li>
+            <li class="nav-item" *ngIf="!this.authService.isLoggedIn">
+                <a class="nav-link" routerLinkActive="active" routerLink="/log-in">Sign-in</a>
+            </li>
+            <li class="nav-item" *ngIf="!this.authService.isLoggedIn">
+                <a class="nav-link" routerLinkActive="active" routerLink="/sign-up">Sign-up</a>
+            </li>
+            <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+                <a class="nav-link" href="#" (click)="logout()">Logout</a>
+            </li>
+        </ul>
     </div>
-  </nav>
-
-  <!-- <div
-  class=" d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top">
-  <h1 class="my-0 mr-md-auto font-weight-normal h" routerLink="/home">kelime kartları</h1>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <a *ngIf="this.authService.isLoggedIn" class="p-2 text-dark">User Profile</a>
-    <a *ngIf="!this.authService.isLoggedIn" class="p-2 text-dark" routerLinkActive="active" routerLink="/log-in">Sign
-      in</a>
-  </nav>
-  <a *ngIf="!this.authService.isLoggedIn" class="btn btn-outline-primary" routerLinkActive="active"
-    routerLinkActive="active" routerLink="/sign-up">Sign up</a>
-  <button (click)="logout()" *ngIf="this.authService.isLoggedIn" type="button" class="btn btn-danger">Logout</button>
-</div> -->
+</nav>

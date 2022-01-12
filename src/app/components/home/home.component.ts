@@ -5,20 +5,98 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SilmeSorgu } from '../kart/kart.component';
+import { KartService } from 'src/app/services/kart.service';
 
 @Component({
   selector: 'ngbd-modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Deste guncelleme!</h4>
+      <h4 class="modal-title">kart Ekleme!</h4>
+    </div>
+    <div class="modal-body">
+      <form
+        class="form-signin"
+        [formGroup]="yeniKart"
+        (ngSubmit)="kartEkle()"
+      >
+
+        <div class="form-group m-3">
+          <label>on yuz</label>
+          <input
+            type="username"
+            class="form-control"
+            formControlName="onYuz"
+            placeholder="bişeyler yazın"
+            required
+          />
+        </div>
+        <div class="form-group m-3">
+          <label>arka yuz</label>
+          <input
+            type="username"
+            class="form-control"
+            formControlName="arkaYuz"
+            placeholder="bişeyler yazın"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mx-3">
+          kart eklensin
+        </button>
+      </form>
+    </div>
+    <div class="modal-footer">
       <button
         type="button"
-        class="close"
-        aria-label="Close"
-        (click)="activeModal.dismiss('Cross click')"
+        class="btn btn-outline-dark"
+        (click)="activeModal.close('Close click')"
       >
-        <span aria-hidden="true">&times;</span>
+        Close
       </button>
+    </div>
+  `,
+})
+export class KartEkleModel implements OnInit {
+  constructor(
+    public fb: FormBuilder,
+    public activeModal: NgbActiveModal,
+    private kartService: KartService
+  ) {
+    this.yeniKart = this.fb.group({
+      onYuz: [''],
+      arkaYuz: [''],
+    });
+  }
+  
+  yeniKart: FormGroup;
+  @Input() id:number;
+
+
+  ngOnInit(): void {
+  }
+
+  kartEkle() {
+    let kart = Object.assign({}, this.yeniKart.value);
+    let onYuz = kart.onYuz;
+    let arkaYuz = kart.arkaYuz;
+    let desteId = this.id;
+    
+   
+    this.kartService.postNewKart({ onYuz, arkaYuz, desteId }).subscribe((res) => {
+      console.log('kart guncellendi');
+      window.location.reload();
+    });
+  }
+
+
+}
+
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h2 class="modal-title">Deste guncelleme!</h2>
     </div>
 
     <div class="modal-body">
@@ -51,18 +129,25 @@ import { SilmeSorgu } from '../kart/kart.component';
           guncelle
         </button>
       </form>
+    </div>
+    <div class="modal-footer d-flex justify-content-start ">
+      <button type="submit" class="btn btn-block btn-success mx-3 w-25 " (click)="kartEkle(oldDeste.id); activeModal.close('Close click')" 
+      >
+        kart ekle
+      </button>
+
       <button
         type="submit"
-        class="btn btn-block btn-danger mx-3"
-        (click)="sil()"
+        class="btn btn-block btn-warning mx-3 w-25 "
+        routerLink="/deste/{{ oldDeste.id }}"
+        (click)="activeModal.close('Close click')"
       >
-        sil
+        deste düzenle
       </button>
-    </div>
-    <div class="modal-footer">
+
       <button
         type="button"
-        class="btn btn-outline-dark"
+        class="btn btn-outline-dark w-25 mx-3 "
         (click)="activeModal.close('Close click')"
       >
         Close
@@ -91,6 +176,11 @@ export class DesteGuncelle implements OnInit {
     this.updateDeste();
   }
 
+  goToDeste(){
+    //this.router.naigate(['/component-one']);
+   // this.Router.navigate(['/', 'page-name']);
+  }
+
   sil() {
     const modalRef = this.modalService.open(SilmeSorgu);
     modalRef.componentInstance.name = 'World';
@@ -98,6 +188,13 @@ export class DesteGuncelle implements OnInit {
     modalRef.componentInstance.nesne = 'deste';
     this.activeModal.close('Close click');
   }
+
+  kartEkle(id:number) {
+    const modalRef = this.modalService.open(KartEkleModel);
+    modalRef.componentInstance.id = id;
+    
+  }
+
 
   updateDeste() {
     this.guncelDeste.setValue({
@@ -112,15 +209,12 @@ export class DesteGuncelle implements OnInit {
     let renk = d.renk;
     let id = this.oldDeste.id;
 
-    console.log(renk + ' - ' + name + ' - ' + id);
     this.desteService.desteGuncelle({ name, renk, id }).subscribe((res) => {
       console.log('deste guncellendi');
       window.location.reload();
     });
   }
 }
-
-//guncelleme için
 
 @Component({
   selector: 'app-home',
@@ -155,22 +249,24 @@ export class HomeComponent implements OnInit {
     modalRef.componentInstance.oldDeste = d;
   }
 
+  // kartEkle(id:number) {
+  //   const modalRef = this.modalService.open(KartEkleModel);
+  //   modalRef.componentInstance.id = id;
+    
+  // }
+
   getDesteler() {
     this.desteService.getUserProfile().subscribe((res) => {
       this.desteler = res.data;
 
       var kartlar = res.data.map((o) => o.kartlars);
       const usersCollection = [].concat(...kartlar);
-      console.log(usersCollection);
 
-      console.log('local deste yaz');
-      console.log(this.desteler);
       this.dataLoaded = true;
     });
   }
 
   getbgColor(renk: string) {
-    console.log('gelen reki ' + renk);
     let renkClass = '';
     switch (renk) {
       case 'mavi':
