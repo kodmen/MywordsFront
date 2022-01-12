@@ -36,6 +36,11 @@ export class KartService {
     return this.http.put(api, kart).pipe(catchError(this.handleError));
   }
 
+  kartSil(id:number){
+    let api = `${this.endpoint}/karts/${id}`;
+    return this.http.delete(api).pipe(catchError(this.handleError));
+  }
+
   // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';

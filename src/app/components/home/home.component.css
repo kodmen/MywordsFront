@@ -7,23 +7,32 @@ body{
     background:#FAFAFA;
 }
 .order-card {
-    color: #fff;
+    /* color: #fff; */
 }
 
 .bg-c-blue {
-    background: linear-gradient(45deg,#40b4ff,#73b4ff);
+    background: linear-gradient(45deg,#4FBDBA,#35858B);
+    /* background-color: #FF6363; */
 }
 
 .bg-c-green {
-    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+    /* background: linear-gradient(45deg,#2ed8b6,#59e0c5); */
+    background-color: #BAFFB4
 }
 
 .bg-c-yellow {
-    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+    /* background: linear-gradient(45deg,#FFB64D,#ffcb80); */
+    background-color: #FFFDA2
 }
 
 .bg-c-pink {
-    background: linear-gradient(45deg,#FF5370,#ff869a);
+    /* background: linear-gradient(45deg,#FF5370,#ff869a); */
+background-color: #FF6363;
+}
+
+.bg-c-orange{
+    /* background: linear-gradient(45deg,#ffa653,#f8bd3d ); */
+    background-color: #FFAB76;
 }
 /* burda hangi rengi istiyorsun diye sorucak mavi yeşil sarı penbe */
 
@@ -43,7 +52,8 @@ body{
 }
 
 .order-card i {
-    font-size: 26px;
+    /* font-size: 26px; */
+    font-size: 16px;
 }
 
 .f-left {
@@ -63,3 +73,10 @@ body{
 .login-main-text h2{
     font-weight: 300;
 }
+
+.btn-size{
+    width: 15pm;
+}
+
+/* /-----------------/*/
+

@@ -30,6 +30,17 @@ export class DesteService {
     )
   }
 
+  desteGuncelle(d:Deste){
+    let api = `${this.endpoint}/destes-user`;
+    return this.http.put(api, d).pipe(catchError(this.handleError));
+  }
+
+  desteSil(id:number){
+    let api = `${this.endpoint}/destes/${id}`;
+    return this.http.delete(api).pipe(catchError(this.handleError));
+  }
+
+
     // Error 
     handleError(error: HttpErrorResponse) {
       let msg = '';

@@ -1,55 +1,56 @@
+<ng-container *ngIf="dataLoaded == true">
+    <div class="row">
+        <div class="col-12 my-2">
+            <div class="d-flex justify-content-start align-items-center">
+                <h2 style="margin: auto 12px;">Yeni Deste ekleme</h2>
+                <button type="button" class="btn btn-success btn-lg" (click)="desteEkleFormAc()">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i> Ekle
+                </button>
+            </div>
 
-<div class="container mt-5 ">
-    <ng-container *ngIf="dataLoaded==true">
-
-        <div class="row">
-            <div class="col-12 ust-yuksek">
-
-                <h2>Yeni Deste ekleme</h2>
-                <button type="button" class="btn btn-success btn-lg" (click)="desteEkleFormAc()"><i class="fa fa-plus-square" aria-hidden="true"></i> Ekle</button>
-                <div *ngIf="desteEkleForm==true" class="col-md-4 col-sm-8">
-
-                    <form class="form-signin" [formGroup]="desteYeni" (ngSubmit)="desteEkle()"> 
-                        <div class="form-group m-3">
-                           <label>Deste ismi</label>
-                           <input type="username" class="form-control" formControlName="name" placeholder="Enter name" required>
-           
-                        </div>
-                        <div class="form-group m-3">
-                           <label>Deste rengi</label>
-                           <input type="username" class="form-control" formControlName="renk" placeholder="Enter color" required>
-                        </div>
-                        <button type="submit" class="btn btn-block btn-primary mx-3">Ekle</button>
-                        <button (click)="desteEkleFormKapat()" class="btn btn-block btn-danger mx-3">Kapat</button>
-                     </form>
-
-                </div>
-              </div>
-              
-          
-            <div class="mt-4"></div>
-            <ng-container *ngFor="let d of desteler ">
-                <div class="col-md-4 col-xl-3 ">
-                    <div [class]="getbgColor(d.renk)" >
-                        <div class="card-block">
-                            <h2 class="m-b-20">{{ d.name | uppercase }}</h2>
-                            <!-- <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span class="mx-2">{{ d.name | uppercase }}</span></h2> -->
-                            <p class="m-b-0"> kelime sayisi: {{ d.kartlars.length }}</p>
-                            <button type="button" class="btn btn-warning btn-lg"><i class="fa fa-wrench" aria-hidden="true"></i> duzenle</button>
-                            <button type="button" class="btn btn-success btn-lg f-right" routerLink = "/kart/{{d.id}}" > <i class="fa fa-play" aria-hidden="true"></i> basla</button>
-
-                            <!-- <ul>
-                            <li>{{d.kartlars.length}}</li>
-                            <li *ngFor="let k of d.kartlars">{{k.onYuz}}</li>
-                            </ul> -->
-                        </div>
+            <div *ngIf="desteEkleForm == true" class="col-md-4 col-sm-8">
+                <form class="form-signin" [formGroup]="desteYeni" (ngSubmit)="desteEkle()">
+                    <div class="form-group m-3">
+                        <label>Deste ismi</label>
+                        <input type="username" class="form-control" formControlName="name" placeholder="Enter name"
+                            required />
                     </div>
-                </div>
-            </ng-container>
+                    <div class="form-group m-3">
+                        <label>Deste rengi</label>
+                        <input type="username" class="form-control" formControlName="renk" placeholder="Enter color"
+                            required />
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary mx-3">
+                        Ekle
+                    </button>
+                    <button (click)="desteEkleFormKapat()" class="btn btn-block btn-danger mx-3">
+                        Kapat
+                    </button>
+                </form>
+            </div>
         </div>
 
-    </ng-container>
-  
-</div>
+        <div class="mt-4"></div>
+        <ng-container *ngFor="let d of desteler">
+            <div class="col-md-4 col-xl-3">
+                <div [class]="getbgColor(d.renk)">
+                    <div class="card-block">
+                        <h2 class="m-b-20">{{ d.name | uppercase }}</h2>
+                        <!-- <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span class="mx-2">{{ d.name | uppercase }}</span></h2> -->
+                        <p class="m-b-0">kelime sayisi: {{ d.kartlars.length }}</p>
 
+                        <div class="d-flex justify-content-center" style="margin-top: 25px">
+                            <button type="button" class="btn btn-light btn-sm w-50 mx-3" (click)="open(d)">
+                                <i class="fa fa-wrench fa-fw" aria-hidden="true"></i> duzenle
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm w-50" routerLink="/kart/{{ d.id }}">
+                                <i class="fa fa-play fa-fw" aria-hidden="true"></i> basla
+                            </button>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
