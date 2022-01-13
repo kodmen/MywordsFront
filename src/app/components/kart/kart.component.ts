@@ -81,6 +81,8 @@ import {
 export class NgbdModalContent implements OnInit {
   @Input() name;
   @Input() oldKart;
+  @Input() toastCall: () => void;
+
 
   guncelKart: FormGroup;
   constructor(
@@ -119,6 +121,7 @@ export class NgbdModalContent implements OnInit {
       this.kartService.kartGuncelle({ onYuz, arkaYuz, id }).subscribe((res) => {
         console.log('kart guncellendi');
         window.location.reload();
+        //this.toastCall();
       });
     }
   }
@@ -162,6 +165,8 @@ export class SilmeSorgu implements OnInit {
   @Input() oldKart;
   @Input() id;
   @Input() nesne;
+  @Input() toastCall: () => void;
+
 
   constructor(
     public fb: FormBuilder,
@@ -175,7 +180,8 @@ export class SilmeSorgu implements OnInit {
     if (this.nesne == 'kart') {
       this.kartService.kartSil(this.id).subscribe((res) => {
         console.log('kart silindi');
-        window.location.reload();
+       // window.location.reload();
+        this.toastCall()
       });
     } else if (this.nesne == 'deste') {
       this.desteService.desteSil(this.id).subscribe((res) => {

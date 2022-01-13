@@ -1,41 +1,64 @@
-<!-- <div class="auth-wrapper">
-    <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
-        <h3 class="h3 mb-3 font-weight-normal text-center">Please sign in</h3>
-        <div class="form-group">
-            <label>username</label>
-            <input type="username" class="form-control" formControlName="username" placeholder="Enter username" required>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" formControlName="password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-block btn-primary">Sign in</button>
-    </form>
-</div> -->
-
 <div class="sidenav">
    <div class="login-main-text">
       <h2>Application<br> Login Page</h2>
       <p>Login or register from here to access.</p>
    </div>
 </div>
+
 <div class="main">
    <div class="col-md-6 col-sm-12">
       <div class="login-form">
-         <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
-            <div class="form-group m-3">
-               <label>User Name</label>
-               <input type="username" class="form-control" formControlName="username" placeholder="Enter username"
-                  required>
 
+         <form class="form-signin" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+
+            <div class="d-flex flex-row align-items-center mb-4">
+               <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+               <div class="form-outline flex-fill mb-0">
+                  <div class="form-group">
+                     <input type="text" formControlName="username" placeholder="username" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Username is required</div>
+                        <div *ngIf="f.username.errors.minlength">
+                           Username must be at least 6 characters
+                        </div>
+                        <div *ngIf="f.username.errors.maxlength">
+                           Username must not exceed 20 characters
+                        </div>
+                     </div>
+                  </div>
+
+
+               </div>
             </div>
-            <div class="form-group m-3">
-               <label>Password</label>
-               <input type="password" class="form-control" formControlName="password" placeholder="Password">
+
+            <div class="d-flex flex-row align-items-center mb-4">
+               <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
+               <div class="form-outline flex-fill mb-0">
+                  <div class="form-group">
+
+                     <input type="password" formControlName="password" placeholder="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">
+                           Password must be at least 6 characters
+                        </div>
+                        <div *ngIf="f.password.errors.maxlength">
+                           Username must not exceed 40 characters
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
             </div>
+
+
+            <ngb-alert *ngIf="hata" [type]="'danger'" [dismissible]="false">kullanıcı adı yada şifreyi yanlış girdiniz!!</ngb-alert>
             <button type="submit" class="btn btn-block btn-primary mx-3">Sign in</button>
             <button (click)="goToSignIn()" class="btn btn-secondary">Register</button>
          </form>
+
       </div>
    </div>
 </div>

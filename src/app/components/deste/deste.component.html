@@ -33,7 +33,7 @@
 
 
 <ng-container *ngIf="dataLoaded"> 
-<div class="col-10">
+<div class="col-12">
     <table class="table">
         <thead>
           <tr>
@@ -57,6 +57,8 @@
       </table>
 </div>
     
-    
+<!-- <button class="btn btn-success" (click)="showSuccess()" ngbTooltip="Will disappear in 10s">Success toast</button>&nbsp; -->
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+
 
 </ng-container>

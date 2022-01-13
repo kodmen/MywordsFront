@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { AuthService } from './../../shared/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,6 +16,8 @@ import { Router } from '@angular/router';
 
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
+  hata = false;
+  submitted = false;
 
   constructor(
     public fb: FormBuilder,
@@ -18,15 +25,38 @@ export class SigninComponent implements OnInit {
     public router: Router
   ) {
     this.signinForm = this.fb.group({
-      username: [''],
-      password: ['']
+      username: ['',[
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ],],
+      password: ['',[
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(40),
+      ],]
     })
   }
 
   ngOnInit() { }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.signinForm.controls;
+  }
+
   loginUser() {
-    this.authService.signIn(this.signinForm.value)
+    this.submitted = true;
+    if (this.signinForm.invalid) {
+      return;
+    } 
+
+    this.authService.signIn(this.signinForm.value).subscribe(res=>{
+        localStorage.setItem('access_token', res.id_token)
+        this.router.navigate(['home']);
+    },err=>{
+      this.hata = true;
+    })
+    
   }
 
   goToSignIn(){

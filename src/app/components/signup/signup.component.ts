@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { AuthService } from './../../shared/auth.service';
 import { Router } from '@angular/router';
-import { CurrentUser } from 'src/app/models/currentUser';
 import Validation from 'src/app/utils/validation';
 
 @Component({
@@ -16,14 +15,11 @@ import Validation from 'src/app/utils/validation';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     public router: Router
-  ) {
-   
-  }
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group(
@@ -75,15 +71,8 @@ export class SignupComponent implements OnInit {
       this.authService
         .signUp({ login, email, password, langKey })
         .subscribe((res) => {
-          console.log('register gidiyor');
-          console.log(res);
-            //
-            this.form.reset();
-            this.router.navigate(['log-in']);
-          if (res) {
-            //this.signupForm.reset();
-            
-          }
+          this.form.reset();
+          this.router.navigate(['log-in']);
         });
     }
   }
@@ -92,39 +81,4 @@ export class SignupComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
   }
-
-  // registerUser() {
-  //   let userModel = Object.assign({}, this.signupForm.value);
-  //   const login = userModel.name;
-  //   const email = userModel.email;
-  //   const password = userModel.password;
-  //   const langKey = 'en';
-  //   const checkPass = userModel.checkPassword;
-
-  //   if (password != checkPass) {
-  //     this.doNotMatch = true;
-  //   } else if (
-  //     login == '' ||
-  //     email == '' ||
-  //     password == '' ||
-  //     checkPass == ''
-  //   ) {
-  //     this.bosVar = true;
-  //   } else {
-  //     this.authService
-  //       .signUp({ login, email, password, langKey })
-  //       .subscribe((res) => {
-  //         console.log('register gidiyor');
-  //         console.log(res);
-
-  //         if (res) {
-  //           this.signupForm.reset();
-  //           this.router.navigate(['log-in']);
-  //         }
-  //       });
-  //   }
-  //   //const authorities = ["ROLE_USER"]
-  //   // const activated = true;
-  // }
-
 }
