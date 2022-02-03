@@ -1,6 +1,8 @@
 # MyWords Project
 MyWords projesi spring ve angular ile kelime kartları oluşturabildiğiniz kartların ön ve arka yüzü olan ve bu kartları destenin içine koyabildiğiniz bir uygulama
 
+backend tarafını incelemek için: https://github.com/kodmen/MyWordBackend
+
 ## logni sayfası
 ![Test Image 1](images/login.png)
 
