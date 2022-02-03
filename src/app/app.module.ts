@@ -18,7 +18,7 @@ import { HomeComponent,DesteGuncelle , KartEkleModel } from './components/home/h
 import { KartComponent, NgbdModalContent,SilmeSorgu } from './components/kart/kart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SliderComponent } from './components/slider/slider.component';
-import { DesteComponent } from './components/deste/deste.component';
+import { DesteComponent,ToastsContainer } from './components/deste/deste.component';
 
 
 // import { NgbdModalComponent, NgbdModalContent } from './modal-component';
@@ -41,7 +41,8 @@ const materialModules = [
     DesteGuncelle,
     SliderComponent,
     DesteComponent,
-    KartEkleModel
+    KartEkleModel,
+    ToastsContainer
   ],
   imports: [
     BrowserModule,

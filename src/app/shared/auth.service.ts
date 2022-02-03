@@ -3,51 +3,39 @@ import { User } from './user';
 import { JhipsterUser } from './jhipsteruser';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CurrentUser } from '../models/currentUser';
-import {RegisterUser } from "../models/registerUser"
+import { RegisterUser } from '../models/registerUser';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthService {
-  endpoint: string = 'http://localhost:8080/api';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser : CurrentUser;
+  endpoint: string = 'http://164.92.229.255:8080/api';
+  headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');
 
-  constructor(
-    private http: HttpClient,
-    public router: Router
-  ) {
-  }
+  currentUser: CurrentUser;
+
+  constructor(private http: HttpClient, public router: Router) {}
 
   // Sign-up
   signUp(user: RegisterUser): Observable<{}> {
-   // user.authorities = ["ROLE_USER"];
-   // user.activated = true;
+    // user.authorities = ["ROLE_USER"];
+    // user.activated = true;
     let api = `${this.endpoint}/register`;
-    return this.http.post(api, user)
-      .pipe(
-        catchError(this.handleError)
-      )
+    return this.http.post(api, user).pipe(catchError(this.handleError));
   }
 
   // Sign-in
   signIn(user: JhipsterUser) {
-    return this.http.post<any>(`${this.endpoint}/authenticate`, user)
-      .subscribe((res: any) => {
-        console.log(res.id_token);
-        localStorage.setItem('access_token', res.id_token)
-
-        this.getUserProfile().subscribe((res) => {
-          this.currentUser = res;//
-          console.log("current user knk");
-          console.log(this.currentUser);
-          this.router.navigate(['home']);
-        })
-      })
+    return this.http.post<any>(`${this.endpoint}/authenticate`, user);
   }
 
   getToken() {
@@ -56,7 +44,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
-    return (authToken !== null) ? true : false;
+    return authToken !== null ? true : false;
   }
 
   doLogout() {
@@ -71,13 +59,13 @@ export class AuthService {
     let api = `${this.endpoint}/account`;
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: Response) => {
-        return res || {}
+        return res || {};
       }),
       catchError(this.handleError)
-    )
+    );
   }
 
-  // Error 
+  // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {

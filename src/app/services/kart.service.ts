@@ -15,8 +15,11 @@ import { YeniKart } from '../models/yeniKart';
   providedIn: 'root',
 })
 export class KartService {
-  endpoint: string = 'http://localhost:8080/api';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  endpoint: string = 'http://164.92.229.255:8080/api';
+  // headers = new HttpHeaders().set('Content-Type', 'application/json');
+  headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');
   constructor(private http: HttpClient, public router: Router) {}
 
   getAllKartByDesteId(id: number) {

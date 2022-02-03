@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DesteService } from 'src/app/services/deste.service';
 import { Deste } from 'src/app/models/deste';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,
+  AbstractControl, } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SilmeSorgu } from '../kart/kart.component';
@@ -80,7 +81,7 @@ export class KartEkleModel implements OnInit {
     let onYuz = kart.onYuz;
     let arkaYuz = kart.arkaYuz;
     let desteId = this.id;
-    
+
    
     this.kartService.postNewKart({ onYuz, arkaYuz, desteId }).subscribe((res) => {
       console.log('kart guncellendi');
@@ -142,7 +143,15 @@ export class KartEkleModel implements OnInit {
         routerLink="/deste/{{ oldDeste.id }}"
         (click)="activeModal.close('Close click')"
       >
-        deste düzenle
+        kart düzenle
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-block btn-danger mx-3 w-25 "
+        (click)="sil(); activeModal.close('Close click')"
+      >
+        deste sil
       </button>
 
       <button
@@ -171,6 +180,7 @@ export class DesteGuncelle implements OnInit {
     });
   }
   guncelDeste: FormGroup;
+  
 
   ngOnInit(): void {
     this.updateDeste();
@@ -226,6 +236,7 @@ export class HomeComponent implements OnInit {
   dataLoaded = false;
   desteEkleForm = false;
   desteYeni: FormGroup;
+  submitted = false;
 
   constructor(
     public desteService: DesteService,
@@ -233,8 +244,8 @@ export class HomeComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.desteYeni = this.fb.group({
-      name: [''],
-      renk: [''],
+      name: ['',[ Validators.required]],
+      renk: ['',[ Validators.required]],
     });
   }
 
@@ -301,7 +312,18 @@ export class HomeComponent implements OnInit {
     this.desteEkleForm = false;
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.desteYeni.controls;
+  }
+
   desteEkle() {
+
+    this.submitted = true;
+    if (this.desteYeni.invalid) {
+      return;
+    } 
+
+
     this.desteService.postNewDeste(this.desteYeni.value).subscribe((res) => {
       console.log('deste gonderildi ');
       console.log(res);
