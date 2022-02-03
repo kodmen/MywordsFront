@@ -16,7 +16,9 @@ import { RegisterUser } from '../models/registerUser';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'http://164.92.229.255:8080/api';
+  endpoint: string = 'http://localhost:8080/api';
+
+  // endpoint: string = 'http://164.92.229.255:8080/api';
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin', '*');

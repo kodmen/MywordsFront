@@ -12,8 +12,8 @@ import {SingleResponseModel}  from '../models/requests/singleResponseModel';
   providedIn: 'root'
 })
 export class DesteService {
-  // endpoint: string = 'http://localhost:8080/api';
-  endpoint: string = 'http://164.92.229.255:8080/api';
+  endpoint: string = 'http://localhost:8080/api';
+  // endpoint: string = 'http://164.92.229.255:8080/api';
 
   // headers = new HttpHeaders().set('Content-Type', 'application/json');
   headers = new HttpHeaders()
